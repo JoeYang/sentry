@@ -26,18 +26,17 @@ echo "[2/6] Creating directories..."
 mkdir -p "$INSTALL_DIR" "$CONFIG_DIR" "$LOG_DIR"
 chown sentry:sentry "$LOG_DIR"
 
-# Step 3: Build
-echo "[3/6] Building with Bazel..."
-cd "$PROJECT_DIR"
-bazel build //sentry:sentry
+# Step 3: Install application source
+echo "[3/6] Installing application..."
+cp -r "$PROJECT_DIR/sentry/" "$INSTALL_DIR/sentry/"
+cp "$PROJECT_DIR/requirements.txt" "$INSTALL_DIR/"
+cp "$PROJECT_DIR/requirements_lock.txt" "$INSTALL_DIR/"
 
-# Step 4: Install application
-echo "[4/6] Installing application..."
-# Copy the Bazel build output
-cp -r bazel-bin/sentry/* "$INSTALL_DIR/"
-# Ensure the runner script exists
-cp -r sentry/ "$INSTALL_DIR/sentry/"
-cp requirements.txt "$INSTALL_DIR/"
+# Step 4: Create venv and install dependencies
+echo "[4/6] Setting up Python virtual environment..."
+python3 -m venv "$INSTALL_DIR/.venv"
+"$INSTALL_DIR/.venv/bin/pip" install --upgrade pip
+"$INSTALL_DIR/.venv/bin/pip" install -r "$INSTALL_DIR/requirements_lock.txt"
 
 # Step 5: Install config
 echo "[5/6] Installing configuration..."
