@@ -1,0 +1,42 @@
+load("@rules_python//python:defs.bzl", "py_test")
+
+py_test(
+    name = "test_config",
+    srcs = ["test_config.py"],
+    deps = [
+        "//sentry/config",
+        "@pypi//pytest",
+        "@pypi//pyyaml",
+    ],
+)
+
+py_test(
+    name = "test_allowlist",
+    srcs = ["test_allowlist.py"],
+    deps = [
+        "//sentry/allowlist",
+        "@pypi//pytest",
+    ],
+)
+
+py_test(
+    name = "test_executor",
+    srcs = ["test_executor.py"],
+    deps = [
+        "//sentry/executor",
+        "//sentry/allowlist",
+        "//sentry/audit",
+        "//sentry/config",
+        "@pypi//pytest",
+    ],
+)
+
+py_test(
+    name = "test_tools",
+    srcs = ["test_tools.py"],
+    deps = [
+        "//sentry/allowlist",
+        "//sentry/tools",
+        "@pypi//pytest",
+    ],
+)

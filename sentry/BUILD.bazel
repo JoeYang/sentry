@@ -1,0 +1,31 @@
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_library(
+    name = "sentry_lib",
+    srcs = ["__init__.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//sentry/allowlist",
+        "//sentry/audit",
+        "//sentry/config",
+        "//sentry/executor",
+        "//sentry/formatter",
+        "//sentry/mcp",
+        "//sentry/planner",
+        "//sentry/telemetry",
+        "//sentry/tools",
+    ],
+)
+
+py_binary(
+    name = "sentry",
+    srcs = ["main.py"],
+    main = "main.py",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":sentry_lib",
+        "//sentry/config",
+        "//sentry/mcp",
+        "//sentry/telemetry",
+    ],
+)

@@ -1,0 +1,31 @@
+llm:
+  base_url: "http://localhost:11434"
+  model: "qwen2.5-coder:7b"
+  timeout: 30
+  max_retries: 2
+
+mcp:
+  transport: "sse"
+  host: "0.0.0.0"
+  port: 8585
+
+security:
+  max_command_timeout: 30
+  max_output_bytes: 65536
+  allowed_paths:
+    - "/var/log"
+    - "/etc"
+    - "/proc"
+    - "/sys"
+    - "/tmp"
+
+logging:
+  level: "INFO"
+  audit_log_path: "/var/log/sentry/audit.jsonl"
+  app_log_path: "/var/log/sentry/sentry.log"
+
+telemetry:
+  enabled: true
+  endpoint: "http://localhost:4317"
+  service_name: "sentry"
+  service_version: "0.1.0"

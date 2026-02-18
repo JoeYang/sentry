@@ -1,0 +1,17 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "mcp",
+    srcs = glob(["*.py"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//sentry/allowlist",
+        "//sentry/audit",
+        "//sentry/config",
+        "//sentry/executor",
+        "//sentry/formatter",
+        "//sentry/telemetry",
+        "//sentry/tools",
+        "@pypi//mcp",
+    ],
+)

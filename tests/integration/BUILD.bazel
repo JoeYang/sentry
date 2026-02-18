@@ -1,0 +1,21 @@
+load("@rules_python//python:defs.bzl", "py_test")
+
+py_test(
+    name = "test_pipeline",
+    srcs = ["test_pipeline.py"],
+    tags = [
+        "integration",
+        "requires-ollama",
+    ],
+    deps = [
+        "//sentry/allowlist",
+        "//sentry/audit",
+        "//sentry/config",
+        "//sentry/executor",
+        "//sentry/formatter",
+        "//sentry/planner",
+        "//sentry/tools",
+        "@pypi//httpx",
+        "@pypi//pytest",
+    ],
+)

@@ -1,0 +1,13 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "executor",
+    srcs = glob(["*.py"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//sentry/allowlist",
+        "//sentry/audit",
+        "//sentry/config",
+        "//sentry/telemetry",
+    ],
+)
